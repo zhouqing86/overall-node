@@ -4,7 +4,7 @@
   "description": "For review the knowledge of NodeJS",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha 'src/**/*-test.js'"
   },
   "author": "qing.zhou",
   "license": "ISC",

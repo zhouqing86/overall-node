@@ -1,5 +1,5 @@
 let assert = require('assert');
-let CommonUtil = require('../src/util/CommonUtil');
+let CommonUtil = require('./CommonUtil');
 
 describe('CommonUtil', function () {
     describe('#reverse', function () {
