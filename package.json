@@ -1,0 +1,14 @@
+{
+  "name": "overall-node",
+  "version": "1.0.0",
+  "description": "For review the knowledge of NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "qing.zhou",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  }
+}
