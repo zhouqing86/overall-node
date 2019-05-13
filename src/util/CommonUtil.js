@@ -3,6 +3,11 @@ function reverse(input) {
     return input.split('').reverse().join('');
 }
 
+function yearlySalary(salary) {
+    return Math.ceil(salary * 12);
+}
+
 export {
-    reverse
+    reverse,
+    yearlySalary,
 }
