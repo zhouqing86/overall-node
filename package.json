@@ -4,7 +4,8 @@
   "description": "For review the knowledge of NodeJS",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require @babel/register --require test/testHelper.js -t 5000 'src/**/*-test.js'"
+    "test": "npm run eslint && mocha --require @babel/register --require test/testHelper.js -t 5000 'src/**/*-test.js'",
+    "eslint": "eslint 'src/**/*.js'"
   },
   "author": "qing.zhou",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "@babel/register": "^7.4.4",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "eslint": "^5.16.0",
     "mocha": "^6.1.4",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0"

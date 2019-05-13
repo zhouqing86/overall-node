@@ -2,6 +2,9 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { reverse, yearlySalary  } from './CommonUtil';
 
+/*global describe*/
+/*global it*/
+
 describe('CommonUtil', function () {
     describe('#reverse', function () {
         it('should return blank string when input string is empty', function () {

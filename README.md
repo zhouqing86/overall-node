@@ -189,3 +189,55 @@ it.only('should call Math ceil function once and use chai as assert', function (
 
 .skip()方法可以用于跳过某些测试测试集合和测试用例。所有被跳过的用例都会被标记为pending用例，在报告中也会以pending用例显示。
 
+
+## Introduce ESLint
+
+- `npm install eslint -D`安装ESLint。
+
+- 而后创建文件`.eslintrc.js`，或者`./node_modules/.bin/eslint --init`来初始化这个配置:
+
+    ```
+    module.exports = {
+        "env": {
+            "es6": true,
+            "node": true
+        },
+        "extends": "eslint:recommended",
+        "globals": {
+            "Atomics": "readonly",
+            "SharedArrayBuffer": "readonly"
+        },
+        "parserOptions": {
+            "ecmaVersion": 2018,
+            "sourceType": "module"
+        },
+        "rules": {
+        }
+    };
+    ```
+
+- 可以执行`./node_modules/.bin/eslint "src/**/*.js"`来执行测试。或者在package.json的`scripts`中定义一个节点
+
+  ```
+  "eslint": "eslint 'src/**/*.js'"
+  ```
+
+  而后可以通过`npm run eslint`来做eslint检查。
+
+  这时由于测试用例中使用了describe等，导致其会报错`error  'describe' is not defined`。
+  
+- 解决测试file中的eslint报错的问题
+
+  有两种方式种方式，第一种是在测试中使用`/*global describe*/`，eslint就会忽略这个错误。
+  
+  第二种方式是创建`.eslintignore`。
+  
+  ```
+  *-test.js
+  ```
+  
+  这样就会忽略掉以为`-test`结尾的JS文件。
+  
+  
+  
+
