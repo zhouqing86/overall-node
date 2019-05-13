@@ -238,6 +238,88 @@ it.only('should call Math ceil function once and use chai as assert', function (
   
   这样就会忽略掉以为`-test`结尾的JS文件。
   
-  
-  
+## Introduce Express to Develop Web Application
 
+### Introduce Express
+
+`npm install --save express`安装express。
+
+而后定义server.js,如:
+
+```
+import express from 'express';
+
+/* global process*/
+
+const app = express();
+
+app.get('/', function (req, res) {
+    res.send("Hello World!");
+});
+
+app.listen(process.env.PORT || 3000);
+```
+
+此时运行`node src/index.js`会报错:
+
+```
+(function (exports, require, module, __filename, __dirname) { import express from 'express';
+                                                                     ^^^^^^^
+SyntaxError: Unexpected identifier
+```
+
+因为NodeJS并不认识import，所以这里需要用到babel了。创建一个index.js，内容如下:
+
+```
+require('@babel/register') ({
+    presets: [ '@babel/env' ]
+});
+module.exports = require('./server.js');
+```
+
+这时通过`node src/index.js`就会正常运行程序，访问[http://localhost:3000](http://localhost:3000)
+
+这时候有一个问题，当`server.js`发生变化时，我们都需要停止服务器再启动服务器，调试起来很麻烦。考虑引入`nodemon`来监控文件的变化来自动重启服务。
+
+### Introduce nodemon
+
+`npm install nodemon -D`安装nodemon。
+
+这时候在package.json的scripts中定义一个命令`"server": "nodemon src/index.js"`，而后执行`npm run server`。
+
+可以看到运行的log:
+
+```
+> nodemon src/index.js
+
+[nodemon] 1.19.0
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching: *.*
+```
+
+修改server.js，添加一个`/about`节点:
+
+```
+app.get('/about', function (req, res) {
+    res.send("About Page!");
+});
+```
+
+这时控制台可以看到:
+
+```
+[nodemon] starting `node src/index.js`
+[nodemon] restarting due to changes...
+[nodemon] starting `node src/index.js`
+```
+
+不需要任何手动的服务器的重新启动，就可以访问[http://localhost:3000/about](http://localhost:3000/about)。
+
+nodemon可以使用`nodemon.json`来做一些配置，如忽略那些文件的控制。如测试文件的变动我们不需要重启服务。
+
+```
+{
+  "verbose": true,
+  "ignore": ["*-test.js", "nodemon.json"]
+}
+```

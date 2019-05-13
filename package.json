@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run eslint && mocha --require @babel/register --require test/testHelper.js -t 5000 'src/**/*-test.js'",
-    "eslint": "eslint 'src/**/*.js'"
+    "eslint": "eslint 'src/**/*.js'",
+    "server": "nodemon src/index.js"
   },
   "author": "qing.zhou",
   "license": "ISC",
@@ -17,7 +18,11 @@
     "chai-as-promised": "^7.1.1",
     "eslint": "^5.16.0",
     "mocha": "^6.1.4",
+    "nodemon": "^1.19.0",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }
