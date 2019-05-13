@@ -1,15 +1,16 @@
 import express from 'express';
+import exphbs from 'express-handlebars';
 
 /* global process*/
 
 const app = express();
 
-app.get('/', function (req, res) {
-    res.send("Hello World!");
-});
+app.engine('.hbs', exphbs({extname: '.hbs'}));
+app.set('view engine', '.hbs');
+app.set('views', 'src/views');
 
-app.get('/about', function (req, res) {
-    res.send("About Page!");
+app.get('/', function(req, res) {
+    res.render('home');
 });
 
 app.listen(process.env.PORT || 3000);

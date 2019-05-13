@@ -320,6 +320,40 @@ nodemon可以使用`nodemon.json`来做一些配置，如忽略那些文件的�
 ```
 {
   "verbose": true,
-  "ignore": ["*-test.js", "nodemon.json"]
+  "ignore": ["*-test.js", "nodemon.json", "*.md"]
 }
 ```
+
+## Introduce Handlebars as template engine
+
+从MVC角度来看，对于Web应用程序，视图层最终会生成HTML页面，但是同时在生成静态的HTML前，模板需要支持逻辑表达式，传入变量等。
+
+市面上的模板引擎有很如，如jade, mustache, haml, handlebars等等，这里选用了`handlebars`。
+
+`npm install express-handlebars --save`安装express-handlebars。
+
+修改server.js，如:
+
+```
+import express from 'express';
+import exphbs from 'express-handlebars';
+
+/* global process*/
+
+const app = express();
+
+app.engine('.hbs', exphbs({extname: '.hbs'}));
+app.set('view engine', '.hbs');
+app.set('views', 'src/views'); //设置views路径
+
+app.get('/', function(req, res) {
+    res.render('home');
+});
+
+app.listen(process.env.PORT || 3000);
+```
+
+因为有设置`nodemon`，就可以直接访问[http://localhost:3000](http://localhost:3000)
+
+
+ 
